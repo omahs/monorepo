@@ -23,34 +23,14 @@ contract TokenRegistryTest is BridgeTest {
     }
 
     function test_getCanonicalTokenIdFuzzed(
-        uint32 fuzzedDomain,
-        bytes32 fuzzedId
+        uint32 remoteDomain,
+        bytes32 remoteId
     ) public {
-        address localAddress = createRemoteToken(fuzzedDomain, fuzzedId);
+        address localAddress = createRemoteToken(domain, remoteId);
         (uint32 domain, bytes32 id) = tokenRegistry.getCanonicalTokenId(
             localAddress
         );
-        assertEq(uint256(domain), fuzzedDomain);
-        assertEq(id, fuzzedId);
-    }
-
-    function test_getRepresentationAddress() public {
-        address repr = tokenRegistry.getRepresentationAddress(
-            remoteDomain,
-            remoteTokenRemoteAddress
-        );
-        assertEq(repr, remoteTokenLocalAddress);
-    }
-
-    function test_getRepresentationAddressFuzzed(
-        uint32 fuzzedDomain,
-        bytes32 fuzzedId
-    ) public {
-        address localAddress = createRemoteToken(fuzzedDomain, fuzzedId);
-        address repr = tokenRegistry.getRepresentationAddress(
-            fuzzedDomain,
-            fuzzedId
-        );
-        assertEq(repr, localAddress);
+        assertEq(uint256(domain), remoteDomain);
+        assertEq(id, remoteId);
     }
 }

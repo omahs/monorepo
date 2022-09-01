@@ -2,6 +2,8 @@
 pragma solidity 0.7.6;
 
 import {BridgeTest} from "./utils/BridgeTest.sol";
+import {BridgeToken} from "../BridgeToken.sol";
+import {TypeCasts} from "@nomad-xyz/contracts-core/contracts/XAppConnectionManager.sol";
 import "forge-std/console2.sol";
 
 contract BridgeRouterTest is BridgeTest {
@@ -12,13 +14,15 @@ contract BridgeRouterTest is BridgeTest {
     uint32 senderDomain;
 
     bool fastLiquidityEnabled;
+    BridgeToken remoteToken;
 
     function setUp() public override {
         super.setUp();
         tokenSender = bridgeUser;
-        tokenReceiver = addressToBytes32(vm.addr(3040));
+        tokenReceiver = TypeCasts.addressToBytes32(vm.addr(3040));
         senderDomain = localDomain;
         receiverDomain = remoteDomain;
+        remoteToken = BridgeToken(remoteTokenLocalAddress);
     }
 
     function test_dustAmmountIs006() public {
