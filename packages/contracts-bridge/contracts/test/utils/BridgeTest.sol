@@ -104,15 +104,15 @@ contract BridgeTest is Test {
     }
 
     /// @notice Create the representation of a remote token
-    /// @param remoteDomain The remote domain
+    /// @param newRemoteDomain The remote domain
     /// @param remoteAddress The id of the remote token, which also happens
     /// to be the address of the token on that domain
-    function createRemoteToken(uint32 remoteDomain, bytes32 remoteAddress)
+    function createRemoteToken(uint32 newRemoteDomain, bytes32 remoteAddress)
         public
         returns (address)
     {
         address localAddress = tokenRegistry.exposed_deployToken(
-            remoteDomain,
+            newRemoteDomain,
             remoteAddress
         );
         // The address is actually that of an UpgradeProxy that points
