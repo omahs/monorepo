@@ -69,5 +69,3 @@ test = 'packages/contracts-da-bridge/contracts/test'
 out = 'packages/contracts-da-bridge/foundry_artifacts'
 ffi = true
 fuzz-runs = 10_000
-
-
